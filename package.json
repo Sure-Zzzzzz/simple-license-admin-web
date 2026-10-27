@@ -1,0 +1,30 @@
+{
+  "name": "@sure-iam/simple-license-admin-web",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "packageManager": "pnpm@9.15.4",
+  "scripts": {
+    "build": "vue-tsc --noEmit && vite build",
+    "test:run": "vitest run",
+    "type-check": "vue-tsc --noEmit",
+    "check": "pnpm type-check && pnpm test:run && pnpm build"
+  },
+  "dependencies": {
+    "@sure-zzzzzz/simple-iam-theme-contract": "1.0.5",
+    "lucide-vue-next": "1.0.0",
+    "vite-plugin-qiankun": "1.0.15",
+    "vue": "3.5.13",
+    "vue-router": "4.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.10.5",
+    "@vitejs/plugin-vue": "5.2.1",
+    "@vue/test-utils": "2.4.6",
+    "jsdom": "25.0.1",
+    "typescript": "5.7.3",
+    "vite": "6.0.7",
+    "vitest": "2.1.8",
+    "vue-tsc": "2.2.0"
+  }
+}

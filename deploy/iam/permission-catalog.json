@@ -1,0 +1,37 @@
+{
+  "_comment": "License 权限清单。本文件是 IAM 侧权限清单登记对照，不是默认全量授权；角色规则按稳定关系（部门/组织/用户组）从本清单选取。models/subject-assignments/activations 为详情页面，operations 为签发任务页面。",
+  "pagePermissions": [
+    "license.page.issuers", "license.page.customers", "license.page.products",
+    "license.page.models", "license.page.plans", "license.page.grants",
+    "license.page.subject-assignments", "license.page.activations", "license.page.credentials",
+    "license.page.operations", "license.page.revocations", "license.page.signing-profiles",
+    "license.page.integrations"
+  ],
+  "apiPermissions": [
+    "license.me.read",
+    "license.issuer.read", "license.issuer.manage",
+    "license.customer.read", "license.customer.manage",
+    "license.product.read", "license.product.manage",
+    "license.model.read", "license.model.manage", "license.model.publish",
+    "license.plan.read", "license.plan.manage",
+    "license.grant.read", "license.grant.manage", "license.grant.issue", "license.grant.deliver",
+    "license.subject-assignment.read", "license.subject-assignment.manage", "license.subject-assignment.force-replace",
+    "license.activation.read", "license.activation.manage", "license.activation.force-replace",
+    "license.revocation.read", "license.revocation.manage", "license.revocation.deliver",
+    "license.signing-profile.read", "license.signing-profile.manage",
+    "license.operation.read", "license.operation.recover",
+    "license.integration.read", "license.integration.manage",
+    "license.decision.evaluate",
+    "license.quota.read", "license.quota.use", "license.quota.manage"
+  ],
+  "dataResources": [
+    { "resource": "license-issuer", "actions": ["read", "manage"], "dimensions": ["issuerId"] },
+    { "resource": "license-customer", "actions": ["read", "manage"], "dimensions": ["customerId"] },
+    { "resource": "license-product", "actions": ["read", "manage", "publish"], "dimensions": ["productId"] },
+    { "resource": "license-grant", "actions": ["read", "manage", "issue", "deliver", "use"], "dimensions": ["grantId"] },
+    { "resource": "license-signing-profile", "actions": ["read", "manage"], "dimensions": ["profileId"] },
+    { "resource": "license-integration", "actions": ["read", "manage"], "dimensions": ["customerId"] }
+  ],
+  "designRoles": ["license-admin", "license-designer", "license-operator", "license-auditor"],
+  "_roleNotes": "角色名是业务建议，不表示隐式权限继承；实际授权以角色在本应用的PAGE/API/DATA规则为准。机器运行端仅授所需API与DATA，不授PAGE。"
+}

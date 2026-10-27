@@ -1,0 +1,142 @@
+:root { font-family: var(--iam-font-family); color: var(--iam-color-text-primary); background: var(--iam-color-canvas); }
+* { box-sizing: border-box; }
+body { margin: 0; }
+button, input, textarea, select { font: inherit; }
+button { cursor: pointer; }
+.license-admin-app { min-height: 100%; min-width: 0; font-family: var(--iam-font-family); font-size: 14px; background: var(--iam-color-canvas); color: var(--iam-color-text-primary); }
+.license-layout { min-height: 100vh; }
+h1, h2, p { margin: 0; } h1 { font-size: 20px; } h2 { font-size: 16px; }
+
+/* 独立调试壳（与 CRM 管理台同构：标题 + 返回门户出口） */
+.license-standalone-header { align-items: center; background: var(--iam-color-surface); border-bottom: 1px solid var(--iam-color-border); display: flex; gap: 20px; justify-content: space-between; padding: 14px 24px; flex-wrap: wrap; }
+.license-standalone-header h1 { font-size: 18px; margin: 0; }
+
+/* 页面与内容（Portal 已提供内容区留白；独立调试模式才由子应用承担外边距） */
+.license-page { align-content: start; display: grid; gap: 20px; width: 100%; min-width: 0; }
+.content { width: 100%; min-width: 0; padding: 0; }
+.license-admin-app--standalone .content { padding: 24px; }
+
+/* ===== 列表卡（CRM/IAM panel 同构） ===== */
+/* License 列表节面使用 panel + license-data-surface；不覆盖契约 admin-data-surface。 */
+.data-toolbar { align-items: center; display: flex; gap: 16px; justify-content: space-between; padding: 0 0 14px; }
+.data-toolbar h2 { font-size: 16px; margin: 0; }
+.data-toolbar h2 span { color: var(--iam-color-text-secondary); font-size: 13px; font-weight: 600; margin-left: 5px; }
+.data-toolbar p { color: var(--iam-color-text-secondary); font-size: 13px; margin: 5px 0 0; }
+/* 卡内筛选条（IAM 第二行工具栏形态）：搜索框+即时筛选下拉+重置 */
+.license-filter-bar { border-bottom: none; flex-wrap: wrap; justify-content: flex-start; padding: 0 0 14px; }
+.license-filter-bar .form-select { flex: none; width: auto; }
+.license-filter-bar .form-select-toggle { min-width: 120px; width: auto; }
+/* 搜索框（图标由 section 使用 lucide Search 渲染，颜色跟随主题） */
+.search-field { align-items: center; display: inline-flex; gap: 8px; position: relative; }
+.search-field > svg { color: var(--iam-color-text-secondary); flex: 0 0 auto; height: 16px; width: 16px; }
+.search-field input { background-color: var(--iam-color-surface); border: 1px solid var(--iam-color-border); border-radius: var(--iam-radius-control); color: var(--iam-color-text-primary); min-height: 38px; padding: 8px 11px; width: min(280px, 100%); }
+.search-field input:focus { border-color: var(--iam-color-primary); outline: 2px solid var(--iam-color-focus-ring); outline-offset: 2px; }
+.sr-only { clip: rect(0, 0, 0, 0); clip-path: inset(50%); height: 1px; overflow: hidden; position: absolute; white-space: nowrap; width: 1px; }
+/* 首列主操作（IAM table-primary-action：名称+编码堆叠） */
+.table-primary-action { background: transparent; border: 0; color: var(--iam-color-text-primary); cursor: pointer; display: grid; gap: 3px; padding: 0; text-align: left; }
+.table-primary-action strong { font-size: 14px; }
+.table-primary-action span { color: var(--iam-color-text-secondary); font-size: 12px; }
+
+/* 表单控件（KMS 同款） */
+input, textarea { min-height: 40px; min-width: 0; max-width: 100%; padding: 8px 12px; border: 1px solid var(--iam-color-border); border-radius: var(--iam-radius-control); background: var(--iam-color-surface-raised); color: var(--iam-color-text-primary); }
+button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+button:disabled { cursor: not-allowed; opacity: .55; }
+.license-form, .license-inline-form { display: grid; gap: 16px; }
+.license-form :is(label, .license-field), .license-inline-form :is(label, .license-field) { display: grid; gap: 8px; min-width: 0; color: var(--iam-color-text-secondary); font-size: 13px; font-weight: 600; }
+.license-form { margin-top: 16px; }
+.license-inline-form { grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); align-items: end; margin-top: 16px; }
+.license-form fieldset { border: 1px solid var(--iam-color-border); border-radius: var(--iam-radius-control); display: grid; gap: 8px; margin: 0; padding: 10px; }
+.license-form legend { color: var(--iam-color-text-secondary); font-size: 13px; padding: 0 4px; }
+.license-form .check-option { display: flex; align-items: center; gap: 8px; }
+.license-form .check-option input { accent-color: var(--iam-color-primary); padding: 0; }
+
+/* 表格走契约 DataTable（列声明+插槽在节面内）；此处只留宿主专属的操作列按钮组与单元格提示 */
+.license-table-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.license-hint { color: var(--iam-color-text-secondary); font-size: 13px; }
+.license-allocation-fieldset { gap: 12px; }
+.license-allocation-fieldset > .license-hint { margin: 0; }
+.license-allocation-row { background: var(--iam-color-surface); border: 1px solid var(--iam-color-border); border-radius: var(--iam-radius-control); display: grid; gap: 10px; padding: 12px; }
+.license-allocation-row > header { align-items: center; display: flex; justify-content: space-between; gap: 8px; }
+.license-allocation-row > header strong { color: var(--iam-color-text-primary); font-size: 13px; }
+.license-allocation-row .license-hint { font-size: 12px; margin: 0; }
+.license-allocation-grid { display: grid; gap: 10px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.license-allocation-summary { display: grid; gap: 2px; }
+.license-allocation-add { justify-self: start; }
+@media (max-width: 760px) { .license-allocation-grid { grid-template-columns: 1fr; } }
+
+/* 状态徽标四态走契约 .status-badge（1.0.5 收编），本地零定义 */
+
+/* 条件树编辑器（模型管理面）：节点行/组合子区/操作数行 */
+.license-tree-node { border: 1px solid var(--iam-color-border); border-radius: var(--iam-radius-control); background: var(--iam-color-surface-raised); display: grid; gap: 10px; min-width: 0; padding: 10px; }
+.license-tree-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.license-tree-kind { flex: 0 1 190px; min-width: 0; }
+.license-tree-remove { margin-left: auto; }
+.license-tree-children { display: grid; gap: 10px; }
+.license-tree-child { border-left: 2px solid var(--iam-color-primary-weak); padding-left: 10px; }
+.license-tree-add { justify-self: start; }
+.license-tree-compare { display: grid; gap: 10px; }
+.license-operand { display: grid; gap: 8px; grid-template-columns: auto minmax(120px, 180px) minmax(160px, 1fr); align-items: center; }
+.license-operand-label { color: var(--iam-color-text-secondary); font-size: 13px; font-weight: 600; }
+@media (max-width: 760px) { .license-operand { grid-template-columns: 1fr; } }
+
+/* 字段声明编辑（模型对话框内小表格） */
+.license-field-defs { display: grid; gap: 8px; }
+.license-field-defs > strong { color: var(--iam-color-text-secondary); font-size: 13px; }
+.license-field-defs-row { display: grid; gap: 8px; grid-template-columns: minmax(110px, 1.2fr) 110px auto minmax(80px, 1fr) minmax(80px, 1fr) 34px; align-items: center; }
+.license-form-check { display: inline-flex; align-items: center; gap: 6px; color: var(--iam-color-text-secondary); font-size: 13px; white-space: nowrap; }
+.license-model-dialog { max-width: 760px; width: min(760px, calc(100vw - 32px)); max-height: calc(100dvh - 40px); overflow-y: auto; }
+.license-model-dialog header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.license-model-dialog .license-form { margin-top: 12px; }
+@media (max-width: 760px) { .license-field-defs-row { grid-template-columns: 1fr 1fr; } }
+
+/* 模型政策编辑器与 CRM 的分组卡同构，保持宿主内容区全宽。 */
+.license-policy-editor { display: grid; gap: 14px; }
+.license-policy-section, .license-policy-card { display: grid; gap: 12px; padding: 14px; border: 1px solid var(--iam-color-border); border-radius: var(--iam-radius-control); background: var(--iam-color-surface-raised); }
+.license-policy-section > header { display: grid; gap: 4px; }
+.license-policy-section h3 { font-size: 14px; margin: 0; }
+.license-policy-section header p { color: var(--iam-color-text-secondary); font-size: 12px; margin: 0; }
+.license-policy-options { display: flex; flex-wrap: wrap; gap: 10px 16px; }
+.license-policy-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); }
+.license-policy-grid > label, .license-policy-section > label { display: grid; gap: 6px; color: var(--iam-color-text-secondary); font-size: 13px; font-weight: 600; }
+.license-policy-subsection, .license-policy-summary { display: grid; gap: 10px; }
+.license-policy-row { align-items: center; display: flex; flex-wrap: wrap; gap: 8px; }
+.license-policy-row > input { flex: 1 1 180px; }
+.license-policy-row > button { flex: 0 0 auto; }
+.license-policy-json { background: var(--iam-color-surface); border: 1px solid var(--iam-color-border); border-radius: var(--iam-radius-control); color: var(--iam-color-text-secondary); font: 12px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; max-height: 280px; overflow: auto; padding: 12px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.license-policy-summary { color: var(--iam-color-text-secondary); font-size: 13px; margin: 0; padding-left: 20px; }
+.license-policy-summary-card { display: grid; gap: 8px; padding: 12px; border: 1px solid var(--iam-color-border); border-radius: var(--iam-radius-control); background: var(--iam-color-surface-raised); }
+.license-policy-summary-card h3 { font-size: 14px; margin: 0; }
+.license-policy-summary-card ul { color: var(--iam-color-text-secondary); display: grid; gap: 4px; margin: 0; padding-left: 18px; }
+
+/* 消息条（KMS 同款） */
+.license-message { align-items: center; display: flex; justify-content: space-between; gap: 12px; margin: 0; padding: 12px 14px; border: 1px solid var(--iam-color-border); border-radius: var(--iam-radius-control); }
+.license-message.success { background: var(--iam-color-success-bg); border-color: var(--iam-color-success); color: var(--iam-color-success); }
+.license-message.danger { background: var(--iam-color-danger-bg); border-color: var(--iam-color-danger); color: var(--iam-color-danger); }
+.license-message:not(.success):not(.danger) { color: var(--iam-color-text-secondary); text-align: center; }
+.license-message span { overflow-wrap: anywhere; }
+
+/* 对话框走契约 .dialog-backdrop/.confirm-dialog 形态；此处补表单对话框布局 */
+.license-form-dialog { max-height: calc(100dvh - 40px); overflow-y: auto; }
+.license-form-dialog .license-form { margin-top: 0; text-align: left; }
+.license-form-dialog footer { display: flex; justify-content: flex-end; gap: 12px; margin-top: 8px; }
+
+/* 键盘可达性焦点环（KMS 同款） */
+.license-admin-app :is(button, a, input, textarea, select):focus-visible { outline: 2px solid var(--iam-color-focus-ring); outline-offset: 2px; }
+.license-admin-app td code { overflow-wrap: anywhere; }
+
+@media (max-width: 760px) {
+  .license-admin-app--standalone .content { padding: 16px; }
+  .license-inline-form { grid-template-columns: 1fr; }
+}
+
+/* 详情页返回条（导航非筛选，不进卡） */
+.license-back-bar { margin-bottom: 16px; }
+
+/* 协作治理抽屉的业务说明与权限范围，不覆盖契约布局。 */
+.license-detail-stack, .license-rule-editor, .license-rule-summary { display: grid; gap: 16px; min-width: 0; }
+.license-detail-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); margin: 0; }
+.license-detail-grid > div { min-width: 0; }
+.license-detail-grid dt { color: var(--iam-color-text-secondary); font-size: 13px; margin-bottom: 5px; }
+.license-detail-grid dd { margin: 0; overflow-wrap: anywhere; }
+.license-rule-grant, .license-rule-constraint { display: grid; gap: 10px; padding: 12px; border: 1px solid var(--iam-color-border); border-radius: var(--iam-radius-control); }
+.license-rule-summary h3, .license-detail-stack h3 { font-size: 14px; margin: 0; }

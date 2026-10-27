@@ -1,0 +1,21 @@
+name: license-web-local
+
+services:
+  license-web-nginx:
+    image: nginx:alpine
+    container_name: license-web-nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - D:/code/github/Sure-Zzzzzz/simple-license-admin-web/dist:/www/license-admin:ro
+    networks:
+      - license-runtime
+      - portal-gateway-upstream
+    restart: unless-stopped
+
+networks:
+  license-runtime:
+    external: true
+    name: license-local_default
+  portal-gateway-upstream:
+    external: true
+    name: portal-gateway-upstream

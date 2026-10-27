@@ -1,0 +1,46 @@
+{
+  "_comment": "License 管理台 IAM 注册对照模板。entry/apiBase 是统一入口公共路径，targetOrigin 只填写 License 自有 Nginx 的内部 HTTP origin。示例域名与公共客户端占位值需替换为部署配置；不填写真实密钥。本文件是登记值对照，不是身份服务器批量导入请求体。",
+  "application": {
+    "applicationCode": "license",
+    "displayName": "通用产品授权",
+    "description": "产品授权服务管理台",
+    "microFrontendName": "license",
+    "entry": "/app/license/index.html",
+    "routePrefix": "/app/license",
+    "targetOrigin": "http://license-web-nginx:80",
+    "defaultPageMenuCode": "license-issuers",
+    "defaultEntryPath": "/issuers",
+    "apiBase": "/api/license/v1",
+    "sortOrder": 50
+  },
+  "menuTree": [
+    { "code": "license-group-identity", "name": "身份与归属", "nodeType": "GROUP", "children": [
+      { "code": "license-issuers", "name": "签发方", "nodeType": "PAGE", "route": "/issuers", "requiredPagePermission": "license.page.issuers" },
+      { "code": "license-customers", "name": "客户与组织绑定", "nodeType": "PAGE", "route": "/customers", "requiredPagePermission": "license.page.customers" }
+    ]},
+    { "code": "license-group-product", "name": "产品与模型", "nodeType": "GROUP", "children": [
+      { "code": "license-products", "name": "产品与应用", "nodeType": "PAGE", "route": "/products", "requiredPagePermission": "license.page.products" },
+      { "code": "license-plans", "name": "授权方案", "nodeType": "PAGE", "route": "/plans", "requiredPagePermission": "license.page.plans" }
+    ]},
+    { "code": "license-group-grant", "name": "授权与交付", "nodeType": "GROUP", "children": [
+      { "code": "license-grants", "name": "客户授权", "nodeType": "PAGE", "route": "/grants", "requiredPagePermission": "license.page.grants" },
+      { "code": "license-credentials", "name": "凭据交付", "nodeType": "PAGE", "route": "/credentials", "requiredPagePermission": "license.page.credentials" },
+      { "code": "license-operations", "name": "签发任务", "nodeType": "PAGE", "route": "/operations", "requiredPagePermission": "license.page.operations" }
+    ]},
+    { "code": "license-group-ops", "name": "运营与治理", "nodeType": "GROUP", "children": [
+      { "code": "license-revocations", "name": "吊销管理", "nodeType": "PAGE", "route": "/revocations", "requiredPagePermission": "license.page.revocations" },
+      { "code": "license-signing-profiles", "name": "签名档案", "nodeType": "PAGE", "route": "/signing-profiles", "requiredPagePermission": "license.page.signing-profiles" },
+      { "code": "license-integrations", "name": "角色联动", "nodeType": "PAGE", "route": "/integration-commands", "requiredPagePermission": "license.page.integrations" }
+    ]}
+  ],
+  "oauthClient": {
+    "clientId": "<PKCE_CLIENT_ID>",
+    "clientName": "通用产品授权门户前端",
+    "clientAuthenticationMethod": "none",
+    "authorizationGrantTypes": ["authorization_code", "refresh_token"],
+    "requireProofKey": true,
+    "scopes": ["openid", "profile"],
+    "redirectUri": "https://portal.example.test/app/license/oauth-callback",
+    "_notes": "公共 PKCE 客户端不设 Secret；HTTP 部署用同域同协议回调，不混用 HTTP/HTTPS。构建环境 VITE_LICENSE_PKCE_CLIENT_ID 必须使用同一客户端 ID。"
+  }
+}
